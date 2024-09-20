@@ -34,7 +34,12 @@ func main() {
 	r := Rectangle{a: aa, b: b, c: c}
 	fmt.Println("Площадь ", square(r))
 
-	fmt.Println("aaaa")
+	//Задание 6
+	fmt.Println("Введите два целых числа")
+	fmt.Scanln(&a)
+	var bb int
+	fmt.Scanln(&bb)
+	fmt.Println("Среднее двух чисел: ", aver(a, bb))
 
 }
 
@@ -58,7 +63,7 @@ func check(a int) string {
 }
 
 func length(str string) int {
-	return 0
+	return len(str)
 }
 
 func aver(a, b int) float64 {
@@ -76,6 +81,6 @@ func newRectangle(a, b, c float64) *Rectangle {
 }
 
 func square(r Rectangle) float64 {
-	p := r.a + r.b + r.c
+	p := (r.a + r.b + r.c) / 2.0
 	return math.Sqrt(p * (p - r.a) * (p - r.b) * (p - r.c))
 }
