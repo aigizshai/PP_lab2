@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-	"math"
+	"os"
+	"unicode/utf8"
 )
 
 func main() {
@@ -18,27 +20,29 @@ func main() {
 	//Задание 3
 	fmt.Println("Числа от 1 до 10 в цикле")
 	for i := 1; i < 11; i++ {
-		fmt.Println(i)
+		fmt.Print(i, " ")
 	}
+	fmt.Println()
 
 	//Задание 4
 	fmt.Println("Введите строку")
 	var str string
-	fmt.Scanln(&str)
+	text, _ := bufio.NewReader(os.Stdin).ReadString('\n')
+	str = text
+	//fmt.Scan(&str)
 	fmt.Println("Длина строки: ", length(str))
 
 	//Задание 5
-	fmt.Println("Введите стороны треугольника")
-	var aa, b, c float64
-	fmt.Scanln(&aa, &b, &c)
-	r := Rectangle{a: aa, b: b, c: c}
+	fmt.Println("Введите стороны прямоугольника")
+	var aa, b float64
+	fmt.Scanln(&aa, &b)
+	r := Rectangle{a: aa, b: b}
 	fmt.Println("Площадь ", square(r))
 
 	//Задание 6
 	fmt.Println("Введите два целых числа")
-	fmt.Scanln(&a)
 	var bb int
-	fmt.Scanln(&bb)
+	fmt.Scanln(&a, &bb)
 	fmt.Println("Среднее двух чисел: ", aver(a, bb))
 
 }
@@ -63,7 +67,7 @@ func check(a int) string {
 }
 
 func length(str string) int {
-	return len(str)
+	return utf8.RuneCountInString(str)
 }
 
 func aver(a, b int) float64 {
@@ -72,15 +76,14 @@ func aver(a, b int) float64 {
 
 // Структура треугольник и работа с ней
 type Rectangle struct {
-	a, b, c float64
+	a, b float64
 }
 
 func newRectangle(a, b, c float64) *Rectangle {
-	r := Rectangle{a: a, b: b, c: c}
+	r := Rectangle{a: a, b: b}
 	return &r
 }
 
 func square(r Rectangle) float64 {
-	p := (r.a + r.b + r.c) / 2.0
-	return math.Sqrt(p * (p - r.a) * (p - r.b) * (p - r.c))
+	return r.a * r.b
 }
